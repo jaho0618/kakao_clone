@@ -1,42 +1,63 @@
 .header-wrapper{
     position: fixed;
+    z-index: 2;
     top: 0px;
     width: 100%;
-    padding: 10px 0px;
+    padding: 5px 0px;
     background-color: white;
     box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.1), 0 -12px 36px -8px rgba(0, 0, 0, 0.1);
 }
 
 
 .chats-body{
-    padding:0px;
+    padding:10px 0px;
     padding-top: 150px;
 }
 
 .chats-body .header,
 .chats-body .status-bar{
-    padding: 10px 20px;
+    padding: 0px 20px;
 }
 .chat-screen{
     background-image: url("../images/chatBg.png");
-    min-height: 100vh;
+    min-height: 1000vh;
 }
 
 .chat__write--container{
     position: fixed;
     bottom: 0px;
     width: 100%;
-    margin: 0 auto;
     left:0;
     right:0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #fcfcfc;
     padding: 10px 20px;
 }
 
+@keyframes float{
+    0%{
+        transform: none;
+        box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.25),
+            0 18px 36px -18px rgba(0, 0, 0, 0.3), 
+            0 -12px 36px -8px rgba(0, 0, 0, 0.025);
+    }
+    50%{
+        transform: translateY(-10px);
+        box-shadow: 0 30px 60px -120px rgba(50, 50, 93, 0.25),
+            0 18px 36px -18px rgba(0, 0, 0, 0.3),
+            0 -12px 36px -8px rgba(0, 0, 0, 0.025);
+    }
+    100%{
+        transform: none;
+        box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.25),
+            0 18px 36px -18px rgba(0, 0, 0, 0.3), 
+            0 -12px 36px -8px rgba(0, 0, 0, 0.025);
+    }
+}
+
 .chat__write{
+    margin: 0 auto;
     bottom: 0px;
     width: 100%;
     border-radius: 0;
@@ -62,14 +83,16 @@
     outline: none;
     width: 80%;
     margin: 0 auto;
-    transform: translateX(-100px);
+    transform: translateY(-50px);
     border-radius: 40px;
-    box-shadow: 0 20px 25px -5px rgba(0,0,0,.1), 0 10px 10px -5px rgba(0,0,0,.04);
+    box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.25),
+    0 18px 36px -18px rgba(0, 0, 0, 0.3), 0 -12px 36px -8px rgba(0, 0, 0, 0.025);
+    animation: float 3s ease-in-out infinite forwards;
 }
 
 .chat__icon{
     font-size: 16px;
-    transition: opacity 0.3s ease-in-out;
+    transition: opacity 0.1s ease-in-out;
 }
 
 .chat__write:focus~.chat__icon{
@@ -97,10 +120,10 @@
 
 .chat-screen .chat__messages{
     border-top: 1px solid #f7f7f7;
-    padding-top: 30px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     padding: 0px 20px;
     padding-top: 30px;
 }
@@ -130,10 +153,20 @@
     align-self: flex-end;
 }
 
+@keyframes spin{
+    from{
+        transform: none;
+    }
+    to{
+        transform: rotateY(1turn);
+    }
+}
+
 .incoming-message img{
     width: 30px;
     border-radius: 10px;
     margin-right: 15px;
+    animation: spin 2s linear infinite;
 }
 
 .message .message__bubble {
@@ -160,5 +193,36 @@
 .sent-message .message__bubble{
     border-bottom-right-radius: 0px;
     background-image: linear-gradient(to left, #f7797d,#FBD786);
+}
+
+@keyframes incomingAnim{
+    from{
+        opacity:0;
+        transform: translateX(-300px);
+    }
+    to{
+        opacity:1;
+        transform: none;
+    }
+}
+
+.incoming-message{
+    animation:incomingAnim 0.5s ease-out forwards;
+}
+
+@keyframes sentAnim{
+    from{
+        opacity:0;
+        transform: translateX(300px);
+    }
+    to{
+        opacity:1;
+        transform: none;
+    }
+}
+
+.sent-message{
+    animation:sentAnim 0.5s ease-out forwards;
+}
 
 }
